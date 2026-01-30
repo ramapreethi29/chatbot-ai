@@ -6,8 +6,12 @@ import openai
 
 app = Flask(__name__)
 
-# Configure OpenAI API key (you'll need to set this)
-openai.api_key = os.environ.get('OPENAI_API_KEY', 'sk-...')
+# Configure OpenAI API key from environment variable
+openai.api_key = os.environ.get('OPENAI_API_KEY')
+
+# Check if the API key is properly set
+if not openai.api_key or openai.api_key.startswith('sk-'):
+    print("Warning: OpenAI API key not set. Please configure your OPENAI_API_KEY environment variable.")
 
 # Initialize database
 def init_db():
